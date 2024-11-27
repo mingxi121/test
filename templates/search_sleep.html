@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于知识图谱的AI睡眠问诊系统</title>
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.4.6.min.css') }}">-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../static/images/logo.png">
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/nifty.min.css" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+    <link href="../static/css/nifty-demo.min.css" rel="stylesheet">
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="../static/css/pace.min.css" rel="stylesheet">
+
+    <script src="../static/js/pace.min.js"></script>
+
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="../static/js/jquery-2.2.4.min.js"></script>
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="../static/js/nifty.min.js"></script>
+    <script src="../static/js/icons.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/tags.js"></script>
+
+
+    <!--=================================================-->
+
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="../static/js/nifty-demo.min.js"></script>
+    <style type="text/css">
+        #tagsList {
+            position: relative;
+            width: 300px;
+            height: 250px;
+        }
+
+        #tagsList a {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            font-family: Microsoft YaHei;
+            color: #999;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 3px 6px;
+        }
+
+        #tagsList a:hover {
+            color: #9f89c2;
+            letter-spacing: 2px;
+        }
+
+        #search:focus {
+            border: 1px solid #9f89c2;
+        }
+
+        .brand-text {
+            text-align: center;
+        }
+        /*登录设置*/
+        #login-setting1 {
+            font-size: 20px;
+            text-align: right;
+            margin: 10px;
+            margin-top: -10px;
+            position: relative;
+            left: 540px;
+            top: 5px;
+        }
+
+        #login-setting2 {
+            font-size: 18px;
+            text-align: right;
+            margin: 10px;
+            margin-top: -10px;
+            position: relative;
+            left: 550px;
+            top: 5px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+    <!--NAVBAR-->
+    <!--===================================================-->
+    <header id="navbar">
+        <div id="navbar-container" class="boxed">
+
+            <!--Brand logo & name-->
+            <!--================================-->
+            <div class="navbar-header">
+                <a href="{{ url_for('search_sleep') }}" class="navbar-brand">
+                    <img src="../static/images/logo.png" alt="Nifty Logo" class="brand-icon">
+                    <div class="brand-title">
+                        <span class="brand-text">众志成城</span>
+                    </div>
+                </a>
+            </div>
+            <!--================================-->
+            <!--End brand logo & name-->
+
+            <!--Navbar Dropdown-->
+            <!--================================-->
+            <div class="navbar-content clearfix">
+                <ul class="nav navbar-top-links pull-left">
+
+                    <!--Navigation toogle button-->
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <li class="tgl-menu-btn">
+                        <a class="mainnav-toggle" href="#">
+                            <i class="demo-pli-view-list"></i>
+                        </a>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-top-links pull-left">
+                    <h4>基于知识图谱的AI睡眠问诊系统</h4>
+                </ul>
+
+
+            </div>
+            <!--================================-->
+            <!--End Navbar Dropdown-->
+
+        </div>
+    </header>
+    <!--===================================================-->
+    <!--END NAVBAR-->
+
+    <div class="boxed">
+        <!--CONTENT CONTAINER-->
+        <!--===================================================-->
+        <div id="content-container">
+            <!--Page content-->
+            <!--===================================================-->
+            <div id="page-content">
+                <h4 class="text-main pad-btm bord-btm">睡眠障碍与症状可视化</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-4">
+                        <div class="input-group">
+                            <input type="text" id="search" class="form-control input-lg"
+                                   placeholder="请输入你要检索的睡眠障碍名称...">
+                            <span class="input-group-addon btn btn-mint" onclick="search()">搜索</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="height: 40px;"></div>
+                <div class="row">
+                    <div class="col-lg-8" style="height: 500px;" id="Disease">
+
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-4" id="tagsList">
+                        <a href="#" data="多发性硬化相关睡眠障碍">多发性硬化相关睡眠障碍</a>
+                        <a href="#" data="阻塞性睡眠呼吸暂停">阻塞性睡眠呼吸暂停</a>
+                        <a href="#" data="中枢性睡眠呼吸暂停">中枢性睡眠呼吸暂停</a>
+                        <a href="#" data="睡眠相关肺泡低通气障碍">睡眠相关肺泡低通气障碍</a>
+                        <a href="#" data="睡眠相关低氧血症">睡眠相关低氧血症</a>
+                        <a href="#" data="睡眠呼吸障碍">睡眠呼吸障碍</a>
+                        <a href="#" data="失眠症">失眠症</a>
+                        <a href="#" data="周期性肢体运动障碍">周期性肢体运动障碍</a>
+                        <a href="#" data="日间过度思睡">日间过度思睡</a>
+                        <a href="#" data="异态睡眠">异态睡眠</a>
+                        <a href="#" data="不宁腿综合征">不宁腿综合征</a>
+                        <a href="#" data="昼夜节律失调性睡眠觉醒障碍">昼夜节律失调性睡眠觉醒障碍</a>
+                        <a href="#" data="睡眠相关的节律性运动障碍">睡眠相关的节律性运动障碍</a>
+                        <a href="#" data="中枢性睡眠增多">中枢性睡眠增多</a>
+                        <a href="#" data="特发性过度睡眠">特发性过度睡眠</a>
+                        <a href="#" data="发作性睡病">发作性睡病</a>
+                        <a href="#" data="快速眼动期睡眠行为障碍">快速眼动期睡眠行为障碍</a>
+                        <a href="#" data="帕金森病睡眠障碍">帕金森病睡眠障碍</a>
+                        <a href="#" data="卒中相关睡眠障碍">卒中相关睡眠障碍</a>
+                        <a href="#" data="孤独症谱系障碍相关睡眠障碍">孤独症谱系障碍相关睡眠障碍</a>
+                        <a href="#" data="偏头痛相关睡眠障碍">偏头痛相关睡眠障碍</a>
+                        <a href="#" data="绝经相关失眠">绝经相关失眠</a>
+                        <a href="#" data="抑郁症相关失眠">抑郁症相关失眠</a>
+                    </div>
+                </div>
+
+            </div>
+            <!--===================================================-->
+            <!--End page content-->
+
+
+        </div>
+        <!--===================================================-->
+        <!--END CONTENT CONTAINER-->
+
+
+        <!--MAIN NAVIGATION-->
+        <!--===================================================-->
+        <nav id="mainnav-container">
+            <div id="mainnav">
+
+                <!--Menu-->
+                <!--================================-->
+                <div id="mainnav-menu-wrap">
+                    <div class="nano">
+                        <div class="nano-content">
+
+                            <ul id="mainnav-menu" class="list-group">
+
+
+                                <!--Category name-->
+                                <li class="list-header">知识图谱可视化</li>
+
+                                <!--Menu list item-->
+                                <li>
+                                    <a href="{{ url_for('search_sleep') }}">
+                                        <i class="fa fa-search" style="width:24px"></i>
+                                        <span class="menu-title">
+                                                <strong>检索睡眠障碍和症状</strong>
+                                            </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('get_all') }}">
+                                        <i class="fa fa-pie-chart" style="width:24px"></i>
+                                        <span class="menu-title">
+                                                <strong>睡眠障碍知识图谱全貌</strong>
+                                            </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li class="list-divider"></li>
+
+                                <!--Category name-->
+                                <li class="list-header">智慧问答</li>
+
+                                <!--Menu list item-->
+                                 <li>
+                                    <a href="{{ url_for('KGQA_Sleep') }}">
+                                        <i class="fa fa-question-circle" style="width:24px"></i>
+                                        <span class="menu-title">
+                                            <strong>睡眠障碍知识问答</strong>
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li class="list-divider"></li>
+
+                                <!--Category name-->
+                                <li class="list-header">智能问诊</li>
+
+                                <!--Menu list item-->
+                                 <li>
+                                    <a href="{{ url_for('KGQA_Sleep_Inquiry') }}">
+                                        <i class="fa fa-question-circle" style="width:24px"></i>
+                                        <span class="menu-title">
+                                            <strong>睡眠障碍问诊</strong>
+                                        </span>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--================================-->
+                <!--End menu-->
+
+            </div>
+        </nav>
+        <!--===================================================-->
+        <!--END MAIN NAVIGATION-->
+
+
+    </div>
+
+    <!-- FOOTER -->
+    <!--===================================================-->
+    <footer id="footer">
+
+        <p class="pad-lft">Copyright&#0169; 2024 众志成城 &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved </p>
+
+    </footer>
+    <!--===================================================-->
+    <!-- END FOOTER -->
+
+    <!-- SCROLL PAGE BUTTON -->
+    <!--===================================================-->
+    <button class="scroll-top btn">
+        <i class="pci-chevron chevron-up"></i>
+    </button>
+    <!--===================================================-->
+</div>
+<!--===================================================-->
+<!-- END OF CONTAINER -->
+
+<script type="text/javascript">
+    $(document).keypress(function (e) {
+        // 回车键事件
+        if (e.which == 13) {
+            search();
+        }
+    });
+    window.onresize = function () {
+        myChart.resize();
+    }
+
+    $.ajaxSetup({async: false});
+    var myChart = echarts.init(document.getElementById("Disease"));
+    myChart.showLoading();
+
+    myChart.hideLoading();
+    option = {
+        title: {
+            textStyle: {
+                fontWeight: "lighter",
+            }
+        },
+        animationDurationUpdate: 1500,
+        animationEasingUpdate: 'quinticInOut',
+        legend: {
+            x: "center",
+            show: true,
+            data: ["睡眠障碍疾病病种", "症状与临床表现", "诊断标准", "检查与测试", "易感因素", "相关疾病", "预防措施及诊疗建议", "并发症"]
+        },
+        series: [
+            {
+                type: 'graph',
+                layout: 'force',
+                symbolSize: 50,
+                edgeSymbol: ['circle', 'arrow'],
+                edgeSymbolSize: [5, 5],
+                edgeLabel: {
+                    normal: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 10
+                        },
+                        formatter: "{c}"
+                    }
+                },
+                force: {
+                    repulsion: 2500,
+                    edgeLength: [10, 100]
+                },
+                focusNodeAdjacency: true,
+                draggable: true,
+                roam: true,
+                categories: [{
+                    name: '睡眠障碍疾病病种',
+                }, {
+                    name: '症状与临床表现',
+                }, {
+                    name: '诊断标准',
+                }, {
+                    name: '检查与测试',
+                }, {
+                    name: '易感因素',
+                }, {
+                    name: '相关疾病',
+                }, {
+                    name: '预防措施及诊疗建议',
+                }, {
+                    name: '并发症',
+                }],
+                label: {
+                    normal: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 15,
+                        },
+                    }
+                },
+                force: {
+                    repulsion: 1000
+                },
+                tooltip: {
+                    formatter: function (node) { // 区分连线和节点，节点上额外显示其他数字
+                        if (!node.value) {
+                            return node.data.name;
+                        } else {
+                            return node.data.name + ":" + node.data.showNum;
+                        }
+                    },
+                },
+                lineStyle: {
+                    normal: {
+                        opacity: 0.9,
+                        width: 1,
+                        curveness: 0.3
+                    }
+                },
+                // progressiveThreshold: 700,
+                nodes: [],
+                links: [],
+            }
+        ]
+    };
+
+    function search() {   // 查找子图
+        $.getJSON('/search_disease', {
+            name: $("#search").val(),
+        }, function (json) {
+            option.series[0].nodes = json.data.map(function (node, idx) {
+                node.id = idx;
+                return node;
+            });
+            option.series[0].links = json.links;
+            myChart.setOption(option, true);
+        });
+    }
+
+    $(".col-lg-4 a").click(function () {
+        $.getJSON('/search_disease', {
+            name: $(this).attr("data"),
+        }, function (json) {
+            option.series[0].nodes = json.data.map(function (node, idx) {
+                node.id = idx;
+                return node;
+            });
+            option.series[0].links = json.links;
+            myChart.setOption(option, true);
+        })
+    });
+</script>
+</body>
+</html>
