@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于知识图谱的AI睡眠问诊系统</title>
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../static/images/logo.png">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/nifty.min.css" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+    <link href="../static/css/nifty-demo.min.css" rel="stylesheet">
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../static/css/wiki.css" rel="stylesheet">
+
+
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="../static/css/pace.min.css" rel="stylesheet">
+
+    <script src="../static/js/pace.min.js"></script>
+
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="../static/js/jquery-2.2.4.min.js"></script>
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="../static/js/nifty.min.js"></script>
+    <script src="../static/js/icons.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+
+
+    <!--=================================================-->
+
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="../static/js/nifty-demo.min.js"></script>
+
+    <style>
+        /*毕设作品显示*/
+        .brand-text {
+            /*font-size:20px;*/
+            text-align: center;
+        }
+    </style>
+
+    <!-- 聊天机器人-->
+    <link rel="icon" type="images/x-icon" href="../static/images/favicon.ico">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/github-dark-dimmed.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+
+
+    <script src="../static/js/jquery-2.1.1.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/highlight.min.js"></script>
+    <script src="../static/js/marked.min.js"></script>
+    <script src="../static/js/html2canvas.min.js"></script>
+
+    <!-- 在原custom基础上改动，增加对选项监听，其它如输入框输入不变-->
+    <script src="../static/js/script.js"></script>
+
+
+</head>
+
+<body>
+
+<div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+    <!--NAVBAR-->
+    <!--===================================================-->
+    <header id="navbar">
+        <div id="navbar-container" class="boxed">
+
+            <!--Brand logo & name-->
+            <!--================================-->
+            <div class="navbar-header">
+                <a href="{{ url_for('search_sleep') }}" class="navbar-brand">
+                    <img src="../static/images/logo.png" alt="Nifty Logo" class="brand-icon">
+                    <div class="brand-title">
+                        <span class="brand-text">众志成城</span>
+                    </div>
+                </a>
+            </div>
+            <!--================================-->
+            <!--End brand logo & name-->
+
+
+            <!--Navbar Dropdown-->
+            <!--================================-->
+            <div class="navbar-content clearfix" style="height: 39px">
+                <ul class="nav navbar-top-links pull-left">
+
+                    <!--Navigation toogle button-->
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <li class="tgl-menu-btn">
+                        <a class="mainnav-toggle" href="#">
+                            <i class="demo-pli-view-list"></i>
+                        </a>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-top-links pull-left">
+                    <h4>基于知识图谱的AI睡眠问诊系统</h4>
+                </ul>
+            </div>
+            <!--================================-->
+            <!--End Navbar Dropdown-->
+
+        </div>
+    </header>
+    <!--===================================================-->
+    <!--END NAVBAR-->
+
+    <div class="boxed">
+
+        <!--CONTENT CONTAINER-->
+        <!--===================================================-->
+        <div id="content-container">
+            <div class="row">
+                <div class="box col-xs-12">
+                    <div class="title">
+                        <h2 class="text-center">
+                            <span style="margin-right: 5px;">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <path fill="currentColor" d="M40.1 467.1l-11.2 9c-3.2 2.5-7.1 3.9-11.1 3.9C8 480 0 472 0 462.2L0 192C0 86 86 0 192 0S384 86 384 192l0 270.2c0 9.8-8 17.8-17.8 17.8c-4 0-7.9-1.4-11.1-3.9l-11.2-9c-13.4-10.7-32.8-9-44.1 3.9L269.3 506c-3.3 3.8-8.2 6-13.3 6s-9.9-2.2-13.3-6l-26.6-30.5c-12.7-14.6-35.4-14.6-48.2 0L141.3 506c-3.3 3.8-8.2 6-13.3 6s-9.9-2.2-13.3-6L84.2 471c-11.3-12.9-30.7-14.6-44.1-3.9zM160 192a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm96 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/>
+</svg>
+                            </span>AI 眠眠
+                        </h2>
+                    </div>
+                    <div class="answer">
+                        <div id="chatWindow">
+                            <!-- 初始对话，机器人先说 -->
+                            <div class="message-bubble">
+                                <span class="chat-icon response-icon"></span>
+                                <div class="message-text response">
+                                    <p>眠眠听说您睡得不好，具体有什么症状呢：</p>
+                                </div>
+                            </div>
+
+                            <!-- 提供一些预设的选项供用户选择 -->
+                            <div id="optionsList" class="options-container">
+                                <button class="option btn">失眠</button>
+                                <button class="option btn">精神萎靡</button>
+                                <button class="option btn">白天睡眠过多</button>
+                                <button class="option btn">夜间睡眠紊乱</button>
+                                <button class="option btn">迟钝</button>
+                                <button class="option btn">情绪行为异常</button>
+                                <button class="option btn">口干</button>
+                                <button class="option btn">睡眠期肌肉迟缓</button>
+                                <button class="option btn">梦呓</button>
+                                <button class="option btn">其他症状</button>
+                            </div>
+                        </div>
+                        <div class="function">
+                            <div class="ipt">
+                                <div class="col-xs-12">
+                                    <textarea id="chatInput" class="form-control" rows="1" placeholder="请输入您的问题..."></textarea>
+                                </div>
+                                <button id="chatBtn" class="btn btn-primary" type="button">发送</button>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="foot" style="margin-top: 20px;">
+                        <p class="lead text-center">“祝你今夜好梦”</p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <!--===================================================-->
+        <!--END CONTENT CONTAINER-->
+
+
+        <!--MAIN NAVIGATION-->
+        <!--===================================================-->
+        <nav id="mainnav-container">
+            <div id="mainnav">
+
+                <!--Menu-->
+                <!--================================-->
+                <div id="mainnav-menu-wrap">
+                    <div class="nano">
+                        <div class="nano-content">
+
+                            <ul id="mainnav-menu" class="list-group">
+
+
+                                <!--Category name-->
+                                <li class="list-header">知识图谱可视化</li>
+
+                                <!--Menu list item-->
+                                <li>
+                                    <a href="{{ url_for('search_sleep') }}">
+                                        <i class="fa fa-search" style="width:24px"></i>
+                                        <span class="menu-title">
+                                                <strong>检索睡眠障碍和症状</strong>
+                                            </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('get_all') }}">
+                                        <i class="fa fa-pie-chart" style="width:24px"></i>
+                                        <span class="menu-title">
+                                                <strong>睡眠障碍知识图谱全貌</strong>
+                                            </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li class="list-divider"></li>
+
+                                <!--Category name-->
+                                <li class="list-header">智慧问答</li>
+
+                                <!--Menu list item-->
+                                 <li>
+                                    <a href="{{ url_for('KGQA_Sleep') }}">
+                                        <i class="fa fa-question-circle" style="width:24px"></i>
+                                        <span class="menu-title">
+                                            <strong>睡眠障碍知识问答</strong>
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li class="list-divider"></li>
+
+                                <!--Category name-->
+                                <li class="list-header">智能问诊</li>
+
+                                <!--Menu list item-->
+                                 <li>
+                                    <a href="{{ url_for('KGQA_Sleep_Inquiry') }}">
+                                        <i class="fa fa-question-circle" style="width:24px"></i>
+                                        <span class="menu-title">
+                                            <strong>睡眠障碍问诊</strong>
+                                        </span>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--================================-->
+                <!--End menu-->
+
+            </div>
+        </nav>
+        <!--===================================================-->
+        <!--END MAIN NAVIGATION-->
+
+    </div>
+
+    <!-- FOOTER -->
+    <!--===================================================-->
+    <footer id="footer">
+
+        <p class="pad-lft">Copyright&#0169; 2024 众志成城 &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved </p>
+
+    </footer>
+    <!--===================================================-->
+    <!-- END FOOTER -->
+
+    <!-- SCROLL PAGE BUTTON -->
+    <!--===================================================-->
+    <button class="scroll-top btn">
+        <i class="pci-chevron chevron-up"></i>
+    </button>
+    <!--===================================================-->
+</div>
+
+</body>
+</html>
